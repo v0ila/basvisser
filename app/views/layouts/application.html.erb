@@ -10,14 +10,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
-<body>
+<body style="background-image:url(images/bg.png); background-repeat: no-repeat; background-size: cover;">
 	<%= yield %>
 	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script type="text/javascript"> 
 		$(".button-collapse").sideNav();
-		 $('.carousel.carousel-slider').carousel({full_width: true});
+		   $(document).ready(function(){
+      $('.slider').slider({full_width: true});
+    });
+        
 	</script>
 </body>
 </html>
