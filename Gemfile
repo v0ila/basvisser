@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
+  repo_name = "#{basvisser}/#{basvisser}" unless repo_name.include?("/")
+  "https://github.com/#{basvisser}.git"
 end
 gem 'rails_12factor', group: :production
 
