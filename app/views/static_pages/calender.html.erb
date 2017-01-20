@@ -1,0 +1,813 @@
+<style rel="stylesheet/less" type="text/css">@speed: 1;
+@coverduration: 1s;
+@dotlineduration: 0.2s;
+@tipduration: @dotlineduration*3;
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  &:focus,
+  &:active,
+  &:target {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+}
+
+body {
+  background-image: url(3.JPG);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#loader {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: auto;
+  height: auto;
+  background: #07052e;
+  background: linear-gradient(bottom, #07052e, #262857);
+  z-index: 99;
+  svg {
+    animation: loader 1s linear infinite;
+    transform: rotate(0deg);
+    top: calc(~"50% - 30px");
+    left: calc(~"50% - 30px");
+    position: absolute;
+  }
+}
+
+#actions {
+  width: 420px;
+  margin: 20px auto;
+  text-align: center;
+  opacity: 0;
+  a {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 3px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Source Sans Pro';
+    color: #1d71b9;
+    position: relative;
+    transition: all 0.3s ease-out;
+    &:first-child {
+      transform: scale(1);
+      animation: bounce 1s linear infinite;
+      margin-right: 10px;
+    }
+    &.active {
+      background: #1d71b9;
+      color: #fff;
+      &:after,
+      &:before {
+        top: 100%;
+        left: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      &:after {
+        border-color: rgba(29, 113, 185, 0);
+        border-top-color: #1d71b9;
+        border-width: 7px;
+        margin-left: -7px;
+      }
+      &:before {
+        border-color: rgba(255, 255, 255, 0);
+        border-top-color: #ffffff;
+        border-width: 8px;
+        margin-left: -8px;
+      }
+    }
+  }
+}
+
+#calendar {
+  position: relative;
+  width: 210px*2;
+  height: 297px*2;
+  margin: 20px auto;
+  z-index: 1;
+  perspective: 1800px;
+  #month {
+    list-style: none;
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    margin: 0;
+    padding: 0;
+    transform: translate(100%, -50%);
+    opacity: 0;
+    li a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 12px;
+      padding: 5px 10px;
+      transition: all 0.2s ease;
+      &:before {
+        content: '';
+        width: 5px;
+        height: 5px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+        transition: all 0.2s ease;
+      }
+      &:hover {
+        color: #fff;
+        &:before {
+          border-color: #fff;
+        }
+      }
+      &.active {
+        color: #fff;
+        &:before {
+          border-color: #fff;
+          background: #1d71b9;
+        }
+      }
+    }
+  }
+  #order {
+    display: none;
+    opacity: 0;
+    transition: all 0.2s ease-out;
+  }
+  #tips {
+    .tip {
+      position: absolute;
+      z-index: 4;
+      transition: all 0.2s ease-out;
+      &#luftaufnahmen {
+        top: 80px;
+        left: -100px;
+        .box {
+          transform-origin: 100% 100%;
+        }
+        &:before {
+          background: #fff;
+        }
+        &:after {
+          border-color: #fff;
+        }
+      }
+      &#monatszitat {
+        top: 220px;
+        right: -100px;
+        &:before {
+          left: -55px;
+          background: #fff;
+        }
+        &:after {
+          left: -70px;
+          border-color: #fff;
+        }
+      }
+      &#kalendarium {
+        top: 400px;
+        left: -100px;
+        .box {
+          transform-origin: 100% 100%;
+        }
+      }
+      &#feiertage {
+        top: 510px;
+        right: -100px;
+        &:before {
+          left: -55px;
+        }
+        &:after {
+          left: -70px;
+        }
+      }
+      .box {
+        width: 240px;
+        background: #fff;
+        padding: 20px;
+        font-family: 'Source Sans Pro';
+        opacity: 0;
+        transform: scaleX(0);
+        transform-origin: 0% 0%;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      }
+      &:before {
+        content: '';
+        width: 0px;
+        height: 3px;
+        background: #1d71b9;
+        position: absolute;
+        top: 50%;
+        right: -55px;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        top: 50%;
+        right: -70px;
+        border: 6px solid #1d71b9;
+        border-radius: 50%;
+        transform: translateY(-40%) scale(0);
+      }
+      h3 {
+        text-transform: uppercase;
+        color: #1d71b9;
+        font-size: 16px;
+        margin: 0px 0px 5px 0px;
+        padding: 0px;
+      }
+      p {
+        margin: 0px;
+        padding: 0px;
+        font-size: 13px;
+        line-height: 16px;
+      }
+    }
+  }
+  .page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform-origin: 50% 5px;
+    transform: rotateX(0deg);
+    transform-style: preserve-3d;
+    z-index: 3;
+    background: #fff;
+    img {
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      background: #fff;
+    }
+    &.flip {
+      animation: flip 1s ease-in forwards;
+    }
+    &.unflip {
+      animation: unflip 1s ease-out forwards;
+    }
+  }
+}
+
+#calendar.order {
+  #tips {
+    transition: all 0.2s ease-out;
+    display: none;
+    opacity: 0;
+  }
+  #order {
+    display: block;
+    opacity: 0;
+    animation: fadein 0.5s forwards;
+    animation-delay: 0.5s;
+    background: #fff;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    padding: 20px;
+    overflow-y: scroll;
+    &:before {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      height: 20px;
+      content: '';
+      z-index: 10;
+      background: linear-gradient(top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    }
+    &:after {
+      position: fixed;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+      height: 20px;
+      content: '';
+      z-index: 10;
+      background: linear-gradient(bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    }
+    .databox {
+      background: #f1f1f1;
+      padding: 20px;
+      margin-bottom: 40px;
+      text-align: center;
+      strong {
+        font-size: 26px;
+        display: block;
+      }
+      span {
+        font-size: 12px;
+        font-style: italic;
+      }
+    }
+    h3 {
+      text-transform: uppercase;
+      color: #1d71b9;
+      font-size: 16px;
+      margin: 0px 0px 5px 0px;
+      padding: 0px;
+    }
+    p {
+      font-size: 13px;
+      line-height: 16px;
+    }
+    table {
+      font-size: 13px;
+      width: 100%;
+      margin-bottom: 10px;
+      td {
+        width: 50%;
+        padding: 3px 5px;
+        border-bottom: 1px solid #ccc;
+        &:first-child {
+          width: 10px;
+        }
+        &:nth-child(2) {
+          text-align: right;
+          width: calc(~"50% - 10px");
+        }
+      }
+      th {
+        text-align: center;
+      }
+    }
+    .hint {
+      font-size: 11px;
+      line-height: 14px;
+    }
+    label {
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: bold;
+      color: #ccc;
+      display: block;
+    }
+    input[type="text"] {
+      border: 1px solid #ccc;
+      padding: 5px;
+      font-family: 'Source Sans Pro', sans-serif;
+      width: 100%;
+      margin-bottom: 5px;
+      &:focus,
+      &:active {
+        border-color: #1d71b9;
+      }
+    }
+    input[type="submit"] {
+      border-radius: 3px;
+      background: #1d71b9;
+      color: #fff;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 0px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+#calendar.explore {
+  #tips {
+    transition: all 0.2s ease-out;
+    display: none;
+    opacity: 0;
+  }
+  #month {
+    opacity: 0;
+    z-index: 19;
+    animation: fadein 0.5s ease-out forwards;
+  }
+}
+
+.flex {
+  display: flex;
+  &.spread {
+    justify-content: space-between;
+  }
+  > div {
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0px;
+    }
+  }
+  .flex-one {
+    flex: 1;
+  }
+  .flex-two {
+    flex: 2;
+  }
+}
+
+@keyframes flip {
+  to {
+    transform: rotateX(360deg);
+    z-index: 2;
+  }
+}
+
+@keyframes unflip {
+  from {
+    transform: rotateX(360deg);
+    z-index: 2;
+  }
+  to {
+    transform: rotateX(0deg);
+    z-index: 3;
+  }
+}
+
+@keyframes tip-dot {
+  to {
+    transform: translateY(-40%) scale(1);
+  }
+}
+
+@keyframes tip-line {
+  to {
+    width: 55px;
+  }
+}
+
+@keyframes tip-box {
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fadein {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes loader {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+body.start {
+  #actions {
+    animation: fadein @dotlineduration ease-out forwards;
+    animation-delay: @coverduration+@tipduration*5;
+  }
+  #calendar {
+    #tips {
+      .tip {
+        &#luftaufnahmen {
+          .box {
+            animation: tip-box @dotlineduration ease-out forwards;
+            animation-delay: @dotlineduration*2+@coverduration;
+          }
+          &:before {
+            animation: tip-line @dotlineduration ease-out forwards;
+            animation-delay: @dotlineduration+@coverduration;
+          }
+          &:after {
+            animation: tip-dot @dotlineduration ease-out forwards;
+            animation-delay: @coverduration;
+          }
+        }
+        &#monatszitat {
+          .box {
+            animation: tip-box @dotlineduration ease-out forwards;
+            animation-delay: @dotlineduration*2+@coverduration+@tipduration;
+          }
+          &:before {
+            animation: tip-line @dotlineduration ease-out forwards;
+            animation-delay: @dotlineduration+@coverduration+@tipduration;
+          }
+          &:after {
+            animation: tip-dot @dotlineduration ease-out forwards;
+            animation-delay: @coverduration+@tipduration;
+          }
+        }
+        &#kalendarium {
+          .box {
+            animation: tip-box @dotlineduration ease-out forwards;
+            animation-delay: @dotlineduration*2+@coverduration+@tipduration*2;
+          }
+          &:before {
+            animation: tip-line @dotlineduration ease-out forwards;
+            animation-delay: @dotlineduration+@coverduration+@tipduration*2;
+          }
+          &:after {
+            animation: tip-dot @dotlineduration ease-out forwards;
+            animation-delay: @coverduration+@tipduration*2;
+          }
+        }
+        &#feiertage {
+          .box {
+            animation: tip-box @dotlineduration ease-out forwards;
+            animation-delay: @dotlineduration*2+@coverduration+@tipduration*3;
+          }
+          &:before {
+            animation: tip-line @dotlineduration ease-out forwards;
+            animation-delay: @dotlineduration+@coverduration+@tipduration*3;
+          }
+          &:after {
+            animation: tip-dot @dotlineduration ease-out forwards;
+            animation-delay: @coverduration+@tipduration*3;
+          }
+        }
+      }
+    }
+    #cover {
+      animation: flip @coverduration*@speed forwards;
+    }
+  }
+}</style>
+
+<div id="loader">
+  <svg width="60" height="60" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(1 1)" stroke-width="2">
+            <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
+            <path d="M36 18c0-9.94-8.06-18-18-18">
+            </path>
+        </g>
+    </g>
+</svg>
+</div>
+
+<div id="actions">
+  <a href="#">Vorbestellen</a>
+  <a href="#">Entdecken</a>
+</div>
+
+<div id="calendar">  
+  <ul id="month">
+    <li><a href="#jan" data-m="1" class="active">Januar</a></li>
+    <li><a href="#feb" data-m="2">Februar</a></li>
+    <li><a href="#mar" data-m="3">März</a></li>
+    <li><a href="#apr" data-m="4">April</a></li>
+    <li><a href="#mai" data-m="5">Mai</a></li>
+    <li><a href="#jun" data-m="6">Juni</a></li>
+    <li><a href="#jul" data-m="7">Juli</a></li>
+    <li><a href="#aug" data-m="8">August</a></li>
+    <li><a href="#sep" data-m="9">September</a></li>
+    <li><a href="#okt" data-m="10">Oktober</a></li>
+    <li><a href="#nov" data-m="11">November</a></li>
+    <li><a href="#dez" data-m="12">Dezember</a></li>
+  </ul>
+  
+  <div class="page" id="dez"><img src="http://kalender.unser-segeberg.de/kalender-2017/img/dezember.jpg" alt="Dezember" /></div>
+  <div class="page" id="nov"><img src="http://kalender.unser-segeberg.de/kalender-2017/img/november.jpg" alt="November" /></div>
+  <div class="page" id="okt"><img src="http://kalender.unser-segeberg.de/kalender-2017/img/oktober.jpg" alt="Oktober" /></div>
+  <div class="page" id="sep"><img src="http://kalender.unser-segeberg.de/kalender-2017/img/september.jpg" alt="September" /></div>
+  <div class="page" id="aug"><img src="http://kalender.unser-segeberg.de/kalender-2017/img/august.jpg" alt="August" /></div>
+  <div class="page" id="jul"><img src="http://kalender.unser-segeberg.de/kalender-2017/img/juli.jpg" alt="Juli" /></div>
+  <div class="page" id="jun"><img src="http://kalender.unser-segeberg.de/kalender-2017/img/juni.jpg" alt="Juni" /></div>
+  <div class="page" id="mai"><img src="http://kalender.unser-segeberg.de/kalender-2017/img/mai.jpg" alt="Mai" /></div>
+  <div class="page" id="apr"><img src="http://kalender.unser-segeberg.de/kalender-2017/img/april.jpg" alt="April" /></div>
+  <div class="page" id="mar"><img src="http://kalender.unser-segeberg.de/kalender-2017/img/maerz.jpg" alt="März" /></div>
+  <div class="page" id="feb"><img src="http://kalender.unser-segeberg.de/kalender-2017/img/februar.jpg" alt="Ferbuar" /></div>
+  <div class="page" id="jan"><img src="http://kalender.unser-segeberg.de/kalender-2017/img/januar.jpg" alt="Januar" /></div>
+  <div class="page" id="cover"><img src="http://kalender.unser-segeberg.de/kalender-2017/img/cover.jpg" alt="Cover" /></div>
+  
+  <div id="order">
+    <h3>Bad Segeberg Wandkalender 2017</h3>
+    <p>Den letzten Kalender haben wir in einer limitierten Stückzahl herausgegeben. Dieses Jahr wollen wir jedem die Möglichkeit geben, einen Kalender zu erhalten. Und das zu <strong>Deinem</strong> Vorteil, denn je mehr Vorbestellungen wir <strong>bis zum 19.12.2016</strong> erhalten, desto günstiger wird der Kalender für alle Käufer:</p>
+    <table cellspacing="0">
+      <tr>
+        <th colspan="2">Vorbestellungen</th>
+        <th>Stückpreis</th>
+      </tr>
+      <tr style="background:#f1f1f1">
+        <td>➤</td>
+        <td>1 - 50</td>
+        <td>20,-€</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>51 - 100</td>
+        <td>15,-€</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>101 - 200</td>
+        <td>10,-€</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Über 200</td>
+        <td>6,-€</td>
+      </tr>
+    </table>
+    
+    <div class="flex spread">
+      <div id="vorbestellungen" class="databox flex-one">
+        <strong>12</strong>
+        <span>Vorbestellungen aktuell</span>
+      </div>
+      <div id="countdown" class="databox flex-one">
+        <strong>216:25:56</strong>
+        <span>Zeit bis zum Druck</span>
+      </div>
+    </div>
+    
+    <h3>Jetzt vorbestellen!</h3>
+    <form>
+      <div class="flex spread">
+        <div class="flex-one">
+        <label for="form_vorname">Vorname</label>
+        <input type="text" name="vorname" id="form_vorname" placeholder="Maximilian" required="required" />
+        </div>
+        
+        <div class="flex-one">
+          <label for="form_nachname">Nachname</label>
+          <input type="text" name="nachname" id="form_nachname" placeholder="Mustermann" required="required" />
+        </div>
+      </div>
+      
+      <label for="form_adresse">Straße + Hausnummer</label>
+      <input type="text" name="adresse" id="form_adresse" placeholder="Musterstraße 1a" required="required" />
+      
+      <div class="flex spread">
+        <div class="flex-one">
+      <label for="form_plz">Postleitzahl</label>
+      <input type="text" name="plz" id="form_plz" placeholder="23795" required="required" />
+        </div>
+        <div class="flex-two">
+      <label for="form_wohnort">Wohnort</label>
+      <input type="text" name="wohnort" id="form_wohnort" placeholder="Bad Segeberg" required="required" />
+          </div>
+      </div>
+      
+      <label for="form_email">E-Mail Adresse</label>
+      <input type="text" name="email" id="form_email" placeholder="max@mustermann.de" required="required" />
+      
+      <p class="hint">Bitte beachten Sie, dass die Vorbestellung verbindlich ist. Wir informieren Sie per E-Mail, sobald eine der o.g. Vorbestellungen überschritten wird und sich somit der Preis verändert. Der Versand der Kalender erfolgt in der KW52, sodass er zum neuen Jahr bei Ihnen ankommt!</p>
+      <input type="submit" value="Verbindlich vorbestellen" />
+    </form>
+  </div>
+  
+  <div id="tips">
+    <div class="tip" id="luftaufnahmen">
+      <div class="box">
+        <h3>Segeberg von oben</h3>
+        <p>12 wunderschöne und einzigartige Luftaufnahmen von Bad Segeberg</p>
+      </div>
+    </div>
+    
+    <div class="tip" id="monatszitat">
+      <div class="box">
+        <h3>Monatszitat</h3>
+        <p>Jeden Monat ein ausgewähltes Zitat bekannter Persönlichkeiten</p>
+      </div>
+    </div>
+    
+    <div class="tip" id="kalendarium">
+      <div class="box">
+        <h3>Kalendarium 2017</h3>
+        <p>Übersichtliche Darstellung der Wochentage und Daten</p>
+      </div>
+    </div>
+    
+    <div class="tip" id="feiertage">
+      <div class="box">
+        <h3>Ferien- und Feiertage</h3>
+        <p>Gesetzliche Feiertage und Schulferien für Schleswig-Holstein</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	$(window).on("load", function() {
+  $('#loader').delay(1000).fadeOut(1000, function() {
+    $('body').addClass('start');
+  });
+});
+
+$('#calendar').click(function() {
+  $('body').addClass('start');
+});
+
+$('#actions a:first-child').click(function(e) {
+  e.preventDefault();
+  if ($('#calendar').hasClass('explore')) {
+    $('#calendar').removeClass('explore');
+    $('#actions a:last-child').removeClass('active');
+  }
+
+  $(this).toggleClass('active');
+  $('#calendar').toggleClass('order');
+});
+$('#actions a:last-child').click(function(e) {
+  e.preventDefault();
+
+  if ($('#calendar').hasClass('order')) {
+    $('#calendar').removeClass('order');
+    $('#actions a:first-child').removeClass('active');
+  }
+
+  $(this).toggleClass('active');
+  $('#calendar').toggleClass('explore');
+});
+
+$('#month a').click(function(e) {
+  e.preventDefault();
+  if (parseInt($('#month a.active').attr('data-m')) > parseInt($(this).attr('data-m'))) {
+    // vorher
+    $('.page' + $(this).attr('href')).removeClass('flip');
+    $('.page' + $(this).attr('href')).addClass('unflip');
+    //$('.page'+$(this).attr('href')).prevAll().removeClass('flip');
+  } else {
+    // nachher
+    $('.page').removeClass('unflip');
+    $('.page' + $(this).attr('href')).removeClass('flip');
+    $('.page' + $(this).attr('href')).prevAll().removeClass('flip');
+    $('.page' + $(this).attr('href')).nextUntil('#cover').addClass('flip');
+  }
+
+  $('#month').find('.active').removeClass('active');
+  $(this).addClass('active');
+});
+
+$('#order form').submit(function(e) {
+  e.preventDefault();
+
+  $('#order').html('<h3>Vielen Dank!</h3><p>Deine Vorbestellung wurde erfolgreich gespeichert. Wir haben Dir eine Bestätigungsmail zugeschickt. Bei Preisänderungen und zum Druckstart melden wir uns ebenfalls unter der angegebenen E-Mail Adresse bei dir. Wir danken Dir für Deine Bestellung und wünschen eine besinnliche Adventszeit!</p><p>Je höher die Auflage, desto niedriger der Stückpreis - die Druckkosten für Wandkalender variieren stark, deshalb haben wir uns dieses Jahr für die Methode mit Vorbestellungen entschieden. So können wir Mengenrabatte an alle Käufer direkt weitergeben. Empfehle diese Seite deinen Freunden, um den Kalender so günstig wie möglich zu erhalten.</p>');
+});
+
+(function($) {
+  $.fn.isAfter = function(sel) {
+    return this.prevAll().filter(sel).length !== 0;
+  };
+
+  $.fn.isBefore = function(sel) {
+    return this.nextAll().filter(sel).length !== 0;
+  };
+})(jQuery);
+
+var deadline = 'Dec 19, 2016';
+setInterval(function() {
+  var t = getTimeRemaining(deadline),
+    h = ((t.days * 24 + t.hours) < 10) ? '0' + t.hours : (t.days * 24 + t.hours);
+  $('#countdown strong').text((t.days * 24 + t.hours) + ':' + ((t.minutes < 10) ? '0' + t.minutes : t.minutes) + ':' + ((+t.seconds < 10) ? '0' + t.seconds : +t.seconds));
+}, 1000);
+
+function getTimeRemaining(endtime) {
+  var t = Date.parse(endtime) - Date.parse(new Date());
+  var seconds = Math.floor((t / 1000) % 60);
+  var minutes = Math.floor((t / 1000 / 60) % 60);
+  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  var days = Math.floor(t / (1000 * 60 * 60 * 24));
+  return {
+    'total': t,
+    'days': days,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
+</script>
