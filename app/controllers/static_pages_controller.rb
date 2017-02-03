@@ -4,4 +4,7 @@ class StaticPagesController < ApplicationController
 
   def appartementen
   end
+
+  def reserveren
+  end
 end
