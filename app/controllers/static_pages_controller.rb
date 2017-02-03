@@ -2,6 +2,6 @@ class StaticPagesController < ApplicationController
   def index
   end
 
-  def calender
+  def appartementen
   end
 end
