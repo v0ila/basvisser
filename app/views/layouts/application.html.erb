@@ -1,72 +1,48 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Betaalbaar Genieten</title>
-    <%=c srf_meta_tags %>
-        <%=s tylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-            <%=j avascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-                <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-                <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.css" media="screen,projection" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Betaalbaar Genieten</title>
+	<%= csrf_meta_tags %>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.css"  media="screen,projection"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
-<body>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.js"></script>
-    <script type="text/javascript">
-        $(".button-collapse").sideNav();
-        $(document).ready(function() {
-            $('.slider').slider({
-                full_width: true
-            });
-        });
-    </script>
-    <nav>
-        <div class="nav-wrapper" style="background-color: rgb(240, 98, 52);">
-            <a href="#!" class="brand-logo"></a>
-            <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down" style="padding-right:20px;">
-                <li>
-                    <%=l ink_to "Home", root_path %>
-                </li>
-                <li>
-                    <%=l ink_to "Appartementen", appartementen_path %>
-                </li>
-                <li>
-                    <%=l ink_to "Reserveren", reserveren_path %>
-                </li>
-                <li>
-                    <%=l ink_to "Amelanderkaap", amelanderkaap_path %>
-                </li>
-                <li>
-                    <%=l ink_to "Contact", contact_path %>
-                </li>
-            </ul>
-            <ul class="side-nav" id="mobile">
-                <li>
-                    <%=l ink_to "Home", root_path %>
-                </li>
-                <li>
-                    <%=l ink_to "Appartementen", appartementen_path %>
-                </li>
-                <li>
-                    <%=l ink_to "Reserveren", reserveren_path %>
-                </li>
-                <li>
-                    <%=l ink_to "Amelanderkaap", amelanderkaap_path %>
-                </li>
-                <li>
-                    <%=l ink_to "Contact", contact_path %>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="divider "></div>
-    <br>
-    <%= yield %>
-
-
+<body><script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.js"></script>
+	<script type="text/javascript"> 
+		$(".button-collapse").sideNav();
+		   $(document).ready(function(){
+      $('.slider').slider({full_width: true});
+    });
+        
+	</script>
+	<nav>
+    <div class="nav-wrapper" style="background-color: rgb(240, 98, 52);">
+        <a href="#!" class="brand-logo"></a>
+        <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down" style="padding-right:20px;">
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Appartementen", appartementen_path %></li>
+            <li><%= link_to "Reserveren", reserveren_path %></li>
+            <li><%= link_to "Amelanderkaap", amelanderkaap_path %></li>
+            <li><%= link_to "Contact", contact_path %></li>
+        </ul>
+        <ul class="side-nav" id="mobile">
+            <li>
+                <%= link_to "Home", root_path %></li>
+<li><%= link_to "Appartementen", appartementen_path %></li>
+<li><%= link_to "Reserveren", reserveren_path %></li>
+<li><%= link_to "Amelanderkaap", amelanderkaap_path %></li>
+<li><%= link_to "Contact", contact_path %></li>
+</ul>
+</div>
+</nav>
+<div class="divider "></div><br>
+	<%= yield %>
+	
+	
 </body>
-
-</html>
+</html> 
