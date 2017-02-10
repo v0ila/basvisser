@@ -3,11 +3,11 @@
         <a href="#!" class="brand-logo"></a>
         <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down" style="padding-right:20px;">
-            <li><%= link_to "index", index_path %></li>
-            <li><%= link_to "appartementen", appartementen_path %></li>
-            <li><%= link_to "reserveren", reserveren_path %></li>
-            <li><%= link_to "amelanderkaap", amelanderkaap_path %></li>
-            <li><%= link_to "contact", contact_path %></li>
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Appartementen", appartementen_path %></li>
+            <li><%= link_to "Reserveren", reserveren_path %></li>
+            <li><%= link_to "Amelanderkaap", amelanderkaap_path %></li>
+            <li><%= link_to "Contact", contact_path %></li>
         </ul>
         <ul class="side-nav" id="mobile">
             <li>
@@ -69,7 +69,7 @@
 <p>Hier komt een korte beschrijving van het 3 persoons huisje. Deze regel tekst dient enkel als opvulling. Anders lijkt het zo vreemd.</p>
 </div>
 <div class="card-action ">
-<a href="# ">Meer informatie</a>
+<%= link_to "Meer informatie", appartementen_path %>
 </div>
 </div>
 </div>
@@ -86,7 +86,7 @@
 <p>Hier komt een korte beschrijving van het 3 persoons huisje. Deze regel tekst dient enkel als opvulling. Anders lijkt het zo vreemd.</p>
 </div>
 <div class="card-action ">
-<a href="# ">Meer informatie</a>
+<%= link_to "Meer informatie", appartementen_path %>
 </div>
 </div>
 </div>
