@@ -19,6 +19,28 @@
     });
         
 	</script>
+	<nav>
+    <div class="nav-wrapper" style="background-color: rgb(240, 98, 52);">
+        <a href="#!" class="brand-logo"></a>
+        <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down" style="padding-right:20px;">
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Appartementen", appartementen_path %></li>
+            <li><%= link_to "Reserveren", reserveren_path %></li>
+            <li><%= link_to "Amelanderkaap", amelanderkaap_path %></li>
+            <li><%= link_to "Contact", contact_path %></li>
+        </ul>
+        <ul class="side-nav" id="mobile">
+            <li>
+                <%= link_to "Home", root_path %></li>
+<li><%= link_to "Appartementen", appartementen_path %></li>
+<li><%= link_to "Reserveren", reserveren_path %></li>
+<li><%= link_to "Amelanderkaap", amelanderkaap_path %></li>
+<li><%= link_to "Contact", contact_path %></li>
+</ul>
+</div>
+</nav>
+<div class="divider "></div><br>
 	<%= yield %>
 	
 	
