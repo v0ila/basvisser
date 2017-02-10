@@ -7,11 +7,12 @@
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.css"  media="screen,projection"/>
+	<link type="text/css" rsel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.css"  media="screen,projection"/>
 	
 </head>
 
-<body><script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.js"></script>
 	<script type="text/javascript"> 
 		$(".button-collapse").sideNav();
@@ -20,8 +21,8 @@
     });
         
 	</script>
-	<nav>
-    <div class="nav-wrapper" style="background-color: rgb(240, 98, 52);">
+<nav>
+    <div class="nav-wrapper" style="background-color: rgb(240, 98, 52); background-image: url(images/bg.png);">
         <a href="#!" class="brand-logo"></a>
         <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down" style="padding-right:20px;">
@@ -33,12 +34,12 @@
         </ul>
         <ul class="side-nav" id="mobile">
             <li><%= link_to "Home", root_path %></li>
-<li><%= link_to "Appartementen", appartementen_path %></li>
-<li><%= link_to "Reserveren", reserveren_path %></li>
-<li><%= link_to "Amelanderkaap", amelanderkaap_path %></li>
-<li><%= link_to "Contact", contact_path %></li>
-</ul>
-</div>
+			<li><%= link_to "Appartementen", appartementen_path %></li>
+			<li><%= link_to "Reserveren", reserveren_path %></li>
+			<li><%= link_to "Amelanderkaap", amelanderkaap_path %></li>
+			<li><%= link_to "Contact", contact_path %></li>
+		</ul>
+	</div>
 </nav>
 
 	<%= yield %>
