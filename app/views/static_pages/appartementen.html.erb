@@ -61,24 +61,66 @@ html {
 
 <script type="text/javascript">
 var images = [
-"../../app/assets/images/bg.png",
-"bg.png",
-"bg.png",
-"bg.png",
-"bg.png",
-"bg.png",
-"bg.png",
-"bg.png",
-"bg.png",
-"bg.png",
-  "bg.png",
-  "http://i.imgur.com/KaPoFDj.jpg", "http://proof.nationalgeographic.com/files/2015/05/MM8190_12_09_30_10398-copy.jpg",
-  "http://farm9.staticflickr.com//8868//18205140545_c48ca49018_h.jpg",
-  "http://drscdn.500px.org/photo/111857581/m%3D2048/2ecfe0e70accd597de673b532e8a8666", "http://fc02.deviantart.net/fs70/f/2014/029/9/1/rophaien_by_tobiasrichter-d4tniwk.jpg",
-  "http://i.imgur.com/CQg225T.jpg",
-  "http://farm3.staticflickr.com//2946//15449458345_4457eacb17_b.jpg",
-  "http://i.imgur.com/Y2802th.jpg",
-  "http://i.imgur.com/KZsmUi2.jpg"
+  "http://i.imgur.com/d147Bxl.jpg", 
+  "http://i.imgur.com/05MVrip.jpg",
+  "http://i.imgur.com/S7IYhgl.jpg",
+  "http://i.imgur.com/ojP1YVa.jpg", 
+  "http://i.imgur.com/bm6rsj0.jpg",
+  "http://i.imgur.com/x7RBxu6.jpg",
+  "http://i.imgur.com/giWQgOH.jpg",
+  "http://i.imgur.com/IwyuDQJ.jpg",
+  "http://i.imgur.com/Hh6k3J8.jpg",
+  "http://i.imgur.com/rNDqyL6.jpg",
+  "http://i.imgur.com/LFXeo2R.jpg",
+  "http://i.imgur.com/vjmyKgO.jpg",
+  "http://i.imgur.com/5ciWtj0.jpg",
+  "http://i.imgur.com/9EG2E16.jpg",
+  "http://i.imgur.com/7aLkUiM.jpg",
+  "http://i.imgur.com/8UM5EkA.jpg",
+  "http://i.imgur.com/SJzkbOU.jpg",
+  "http://i.imgur.com/FQp2hFZ.jpg",
+  "http://i.imgur.com/uHmutda.jpg",
+  "http://i.imgur.com/9Rmj753.jpg",
+  "http://i.imgur.com/gJ9Ljcp.jpg",
+  "http://i.imgur.com/s3iRoGx.jpg",
+  "http://i.imgur.com/C6cWWAn.jpg",
+  "http://i.imgur.com/GTKcLO8.jpg",
+  "http://i.imgur.com/zaBC4Yh.jpg",
+  "http://i.imgur.com/HEwjakC.jpg",
+  "http://i.imgur.com/wthftUU.jpg",
+  "http://i.imgur.com/bm6rsj0.jpg",
+  "http://i.imgur.com/nxHW2XD.jpg",
+  "http://i.imgur.com/sSC7e4e.jpg",
+  "http://i.imgur.com/B0bg3Tw.jpg",
+  "http://i.imgur.com/v74ryAr.jpg",
+  "http://i.imgur.com/9kqEFZS.jpg",
+  "http://i.imgur.com/ncZJogm.jpg",
+  "http://i.imgur.com/LImA51J.jpg",
+  "http://i.imgur.com/j7Nn7ry.jpg",
+  "http://i.imgur.com/OQYjNjs.jpg",
+  "http://i.imgur.com/O2ZzFf9.jpg",
+  "http://i.imgur.com/kDb6s2B.jpg",
+  "http://i.imgur.com/3xDJxSj.jpg",
+  "http://i.imgur.com/LWA9rXJ.jpg?1",
+  "http://i.imgur.com/zHNGny7.jpg",
+  "http://i.imgur.com/9nLW84F.jpg",
+  "http://i.imgur.com/3KvvUNA.jpg",
+  "http://i.imgur.com/I4FHN5N.jpg",
+  "http://i.imgur.com/OmdaEm4.jpg",
+  "http://i.imgur.com/ZK0buZe.jpg",
+  "http://i.imgur.com/xq68iN3.jpg",
+  "http://i.imgur.com/0l3SHmC.jpg",
+  "http://i.imgur.com/OVg1in5.jpg",
+  "http://i.imgur.com/nK4SRyd.jpg",
+  "http://i.imgur.com/FeWQTuK.jpg",
+  "http://i.imgur.com/3KnMX8X.jpg",
+  "http://i.imgur.com/wnykHlN.jpg",
+  "http://i.imgur.com/OguNHql.jpg",
+  "http://i.imgur.com/Y44oWLb.jpg",
+  "http://i.imgur.com/t64SzSm.jpg",
+  "http://i.imgur.com/AyLjC4u.jpg",
+  "http://i.imgur.com/W2wnupr.jpg",
+  "http://i.imgur.com/z2uIC9m.jpg"	
 ];
 
 var gallery = document.getElementById("gallery");
@@ -88,10 +130,9 @@ for (var i = 0; i < images.length; i++) {
   thumbnailWrapper.className = "thumbnail-wrapper";
 
   var thumbnail = document.createElement("a");
-  // thumbnail.className = "thumbnail";
+  thumbnail.className = "thumbnail";
   thumbnail.setAttribute('style', 'background-image:url(\"' + images[i] + '\");');
   thumbnail.setAttribute('href', images[i]);
-  thumbnail.className = "materialboxed";
 
   thumbnailWrapper.appendChild(thumbnail);
   gallery.appendChild(thumbnailWrapper);
