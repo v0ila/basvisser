@@ -1,10 +1,100 @@
-<div class="container">
-    <div class="row">
-        <div class="col m6">
-            Appartement 3 persoons
-        </div>
-        <div class="col m6">
-            Appartement 5 persoons
-        </div>
-    </div>
+
+<div class="row">   
+
+	<div class="col l12"><div id="gallery"></div></div>
 </div>
+
+<style type="text/css">
+	/* Code mostly copied from https://github.com/gpbl/isomorphic500/blob/master/src/style/ThumbnailCollection.scss */
+
+html {
+  font-size: 16px;
+}
+
+#gallery {
+  max-width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.thumbnail-wrapper {
+  background-color: #333;
+  min-width: 12rem;
+  min-height: 8rem;
+  position: relative;
+  flex: 1;
+  flex-basis: 8rem;
+  margin-right: 2px;
+  margin-bottom: 2px;
+}
+
+.thumbnail-wrapper:nth-child(5n) {
+  flex-basis: 14rem;
+}
+
+.thumbnail-wrapper:nth-child(2n+1) {
+  flex-basis: 10rem;
+}
+
+.thumbnail-wrapper:nth-child(7n+4) {
+  flex-basis: 20rem;
+  min-height: 12rem;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.thumbnail:hover {
+  opacity: 0.9;
+  transition: .2s ease-in;
+}
+</style>
+
+
+<script type="text/javascript">
+var images = [
+"../../app/assets/images/bg.png",
+"bg.png",
+"bg.png",
+"bg.png",
+"bg.png",
+"bg.png",
+"bg.png",
+"bg.png",
+"bg.png",
+"bg.png",
+  "bg.png",
+  "http://i.imgur.com/KaPoFDj.jpg", "http://proof.nationalgeographic.com/files/2015/05/MM8190_12_09_30_10398-copy.jpg",
+  "http://farm9.staticflickr.com//8868//18205140545_c48ca49018_h.jpg",
+  "http://drscdn.500px.org/photo/111857581/m%3D2048/2ecfe0e70accd597de673b532e8a8666", "http://fc02.deviantart.net/fs70/f/2014/029/9/1/rophaien_by_tobiasrichter-d4tniwk.jpg",
+  "http://i.imgur.com/CQg225T.jpg",
+  "http://farm3.staticflickr.com//2946//15449458345_4457eacb17_b.jpg",
+  "http://i.imgur.com/Y2802th.jpg",
+  "http://i.imgur.com/KZsmUi2.jpg"
+];
+
+var gallery = document.getElementById("gallery");
+
+for (var i = 0; i < images.length; i++) {
+  var thumbnailWrapper = document.createElement("div");
+  thumbnailWrapper.className = "thumbnail-wrapper";
+
+  var thumbnail = document.createElement("a");
+  thumbnail.className = "thumbnail";
+  thumbnail.setAttribute('style', 'background-image:url(\"' + images[i] + '\");');
+  thumbnail.setAttribute('href', images[i]);
+
+  thumbnailWrapper.appendChild(thumbnail);
+  gallery.appendChild(thumbnailWrapper);
+}
+
+console.log(gallery)
+</script>
