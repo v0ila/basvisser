@@ -1,6 +1,18 @@
 <div class="container">
 <div class="row">
-<script type="text/javascript">$('input[name="daterange"]').daterangepicker();</script>
+<input type="text" name="daterange" value="01/01/2017 1:30 PM - 01/01/2018 1:30 PM" />
+ 
+<script type="text/javascript">
+$(function() {
+    $('input[name="daterange"]').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY h:mm A'
+        }
+    });
+});
+</script>
 </div>
 </div>
 
