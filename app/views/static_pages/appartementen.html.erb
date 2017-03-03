@@ -88,9 +88,10 @@ for (var i = 0; i < images.length; i++) {
   thumbnailWrapper.className = "thumbnail-wrapper";
 
   var thumbnail = document.createElement("a");
-  thumbnail.className = "thumbnail";
+  // thumbnail.className = "thumbnail";
   thumbnail.setAttribute('style', 'background-image:url(\"' + images[i] + '\");');
   thumbnail.setAttribute('href', images[i]);
+  thumbnail.className = "materialboxed";
 
   thumbnailWrapper.appendChild(thumbnail);
   gallery.appendChild(thumbnailWrapper);
